@@ -5,9 +5,29 @@
 
 <script>
 	let text;
+	let result_post;
+	let results;
 
-	async function doAnalyse (text) {
 
+	async function doPost () {
+		const res = await fetch(`apiUrl`, {
+		method: 'POST', 
+			body: JSON.stringify({
+				text
+			}),
+			headers: 
+    {
+        'Accept': 'application/json',
+    		'Content-Type': 'application/json'
+    }
+		})
+		const json = await res.json()
+		result_post = JSON.stringify(json)
+		
+		const res2 = await self.fetch(`apiUrl`)
+			.then(async res => {				
+				results = await res.json();
+			})
 	}
 
 </script>
@@ -16,7 +36,7 @@
 <body>
 	<h1>ВВЕДИТЕ ТЕКСТ ДЛЯ АНАЛИЗА</h1>
 	<textarea bind:value={text}></textarea>
-	<button on:click={doAnalyse}>АНАЛИЗ</button>
+	<button on:click={doPost}>АНАЛИЗ</button>
 </body>
 
 

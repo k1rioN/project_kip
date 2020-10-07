@@ -1,10 +1,9 @@
 <script>
-	export let segment;
+	
 </script>
 
 <style>
 	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
 		font-weight: 300;
 		padding: 0 1em;
 		text-align: center;
@@ -24,37 +23,16 @@
 		clear: both;
 	}
 
-	li {
-		display: block;
-		float: left;
-	}
-
-	[aria-current] {
-		position: relative;
-		display: inline-block;
-	}
-
-	[aria-current]::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
-		display: block;
-		bottom: -1px;
-	}
-
-	a {
-		text-decoration: none;
-		padding: 1em 0.5em;
-		display: block;
-		text-align: center;
+	img {
+		width: 350px;
+		height: 200px;
+		margin-right: 10px;
+		margin-top: 90px;
 	}
 </style>
 
 <nav>
 	<ul>
-		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
-		<li><a href="about">about</a></li>
+		<img src="gAoHnb0oeEk.jpg" alt="kip"/>
 	</ul>
 </nav>
