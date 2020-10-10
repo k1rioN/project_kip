@@ -10,7 +10,7 @@
 
 
 	async function doPost () {
-		const res = await fetch(`apiUrl`, {
+		const res = await fetch(`http://d84030b6807c.ngrok.io/process`, {
 		method: 'POST', 
 			body: JSON.stringify({
 				text
@@ -18,16 +18,17 @@
 			headers: 
     {
         'Accept': 'application/json',
-    		'Content-Type': 'application/json'
+			'Content-Type': 'application/json'
     }
 		})
 		const json = await res.json()
 		result_post = JSON.stringify(json)
 		
-		const res2 = await self.fetch(`apiUrl`)
+		const res2 = await self.fetch(`http://d84030b6807c.ngrok.io/process`)
 			.then(async res => {				
 				results = await res.json();
 			})
+		console.log("Post done")
 	}
 
 </script>
@@ -37,12 +38,12 @@
 	<h1>ВВЕДИТЕ ТЕКСТ ДЛЯ АНАЛИЗА</h1>
 	<textarea bind:value={text}></textarea>
 	<button on:click={doPost}>АНАЛИЗ</button>
+	<p>{results}</p>
 </body>
 
 
 
 <style>
-	
 	textarea { width: 100%; height: 200px; }
 	h1 {
 		text-align: center;
