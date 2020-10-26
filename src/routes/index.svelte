@@ -24,9 +24,19 @@
 	let soc;
 	let tech;
 	let mathcount;
+	let physicscount;
+	let economcount;
+	let pravocount;
+	let normacount;
+	let doktricount;
+	let organcount;
+	let marketcount;
+	let soccount;
+	let techcount;
+
 
 	async function doPost () {
-		const res = await fetch(`https://aec422273963.ngrok.io/process`, {
+		const res = await fetch(`https://b10e92433b6a.ngrok.io/process`, {
 		method: 'POST', 
 			body: JSON.stringify({
 				text
@@ -50,16 +60,20 @@
 		market = result_post.marketing.words;
 		soc = result_post.computer.words;
 		tech = result_post.tech.words;
-		mathcount = result_post.physics.count;
+		mathcount = result_post.math.count;
+		physicscount = result_post.physics.count;
+		economcount = result_post.economy.count;
+		pravocount = result_post.rules.count;
+		normacount = result_post.normative.count;
+		doktricount = result_post.const.count;
+		organcount = result_post.organization.count;
+		marketcount = result_post.marketing.count;
+		soccount = result_post.computer.count;
+		techcount = result_post.tech.count;
 		console.log(physics)
-		data = {
-    labels: ['Математический', 'Физический', 'Экономический', 'Правовой', 'Нормативный', 'Доктринальный ', 'Организационный', 'Маркетинговый', 'Социально-компьютерный', 'Технический'],
-    datasets: [
-      {
-        values: [{mathcount}, econom]
-      }
-    ]
-  };
+	}
+	function back() {
+		animation = false;
 	}
 </script>
 
@@ -73,9 +87,7 @@
 		<textarea bind:value={text}></textarea>
 		<button on:click={doPost}>АНАЛИЗ</button>
 		</TransitionWrapper>
-		
 	</div>
-		
 	{:else}
 	{#await doPost}
 	<p>...подождите</p>
@@ -168,17 +180,32 @@
 	</div>
 	{#if status === true}
 		{#if (process.browser) }
-		<Chart data={data} type="line"/>
+		<Chart data={data = {
+    labels: ['Математический', 'Физический', 'Экономический', 'Правовой', 'Нормативный', 'Доктринальный ', 'Организационный', 'Маркетинговый', 'Социально-компьютерный', 'Технический'],
+    datasets: [
+      {
+        values: [mathcount, physicscount, economcount, pravocount, normacount, doktricount, organcount, marketcount, soccount, techcount]
+      }
+    ]
+  }} type="line"/>
 		{/if}
 	{/if}
 	{/await}
+	<button on:click={back} class="back">Вернуться назад</button>
 	{/if}
 </body>
 
 
 
 <style>
-	textarea { width: 100%; height: 200px; margin-top: -20px; background-color: white; resize: none; }
+	textarea { width: 100%; height: 200px; margin-top: -30px; background-color: white; resize: none; }
+	.back {
+		margin-top: 10px;
+		height: 30px;
+		width: 160px;
+		margin-left: 330px;
+		position: absolute;
+	}
 	.tech {
 		position: absolute;
 		left: 1076px;
@@ -212,25 +239,25 @@
 	.norma {
 		position: absolute;
 		left: 120%;
-		top: 40px;
+		top: 25px;
 		text-align: center;
 	}
 	.pravo {
 		position: absolute;
 		left: 95%;
-		top: 40px;
+		top: 25px;
 		text-align: center;
 	}
 	.physics {
 		position: absolute;
 		left: 45%;
-		top: 40px;
+		top: 25px;
 		text-align: center;
 	}
 	.econom {
 		position: absolute;
 		left: 70%;
-		top: 40px;
+		top: 25px;
 		text-align: center;
 	}
 	.mathtext, .phytext, .economtext, .pravotext, .normatext, .doktritext, .organtext, .markettext, .soctext, .techtext {
@@ -240,6 +267,7 @@
 		background-color: white;
 		resize: none;
 		top: 10px;
+		margin-top: 3px;
 		text-align: center;
 		font-size: 17px;
 		overflow-wrap: break-word;
@@ -248,10 +276,12 @@
 	.math {
 		position: absolute;
 		left: 20%;
-		top: 40px;
+		top: 25px;
 		text-align: center;
 	}
 	.textafter {
+		font-size: 20px;
+		top: 5%;
 		width: 500px;
 		height: 400px;
 		background-color: whitesmoke;
@@ -259,11 +289,12 @@
 	}
 	.after {
 		position: relative;
+		top: 15%;
 		left: -50%;
 	}
 	h1 {
 		text-align: center;
-		margin-top: -30px;
+		margin-top: 60px;
 		margin-bottom: 5px;
 	}
 	button {
